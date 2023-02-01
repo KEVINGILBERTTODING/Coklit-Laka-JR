@@ -56,7 +56,7 @@
 				<div class="col-12">
 					<div class="card mb-4 ">
 						<div class="card-header ">
-							<h3 id="h1">Import data</h3>
+							<h3 id="h1">Import data Excel</h3>
 							<div class="row mt-3 d-flex flex-row-reverse">
 
 								<div class="col col-md-2">
@@ -76,14 +76,24 @@
 
 						</div>
 						<div class="container-md containerku">
-							<form action="<?= base_url('pengentry/iw/import_excel'); ?>" method="post" enctype="multipart/form-data">
+							<form action="<?= base_url('pengentry/Coklit/import_excel'); ?>" method="post" enctype="multipart/form-data">
 
-								<div class="form-group" id="form_input_file">
-									<label>Pilih File Excel</label>
-									<input class="form-control w-50" type="file" id="input_file" name="fileExcel" accept=".xls, .xlsx" required>
+								<div class="row">
+									<div class="col">
+										<div class="form-group" id="form_input_file">
+											<label>Pilih File IRMS</label>
+											<input class="form-control " type="file" id="input_file" name="fileExcelIrms" accept=".xls, .xlsx" required>
+										</div>
+									</div>
+									<div class="col">
+										<div class="form-group" id="form_input_file">
+											<label>Pilih File DASI</label>
+											<input class="form-control " type="file" id="input_file" name="fileExcelDasi" accept=".xls, .xlsx" required>
+										</div>
+									</div>
 								</div>
 								<div>
-									<button class='btn btn-success' id="btn_submit" type="submit">
+									<button class='btn btn-success w-100' id="btn_submit" type="submit">
 										<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
 										Import
 									</button>
@@ -147,7 +157,6 @@
 			<?php echo form_close(); ?>
 
 
-			<!-- Modal entry detail user -->
 			<?php echo form_open_multipart('pengentry/iw/update_batch_setting_iwkl'); ?>
 			<div class="modal fade" id="setting_iwkl" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 				<div class="modal-dialog modal-dialog-scrollable">

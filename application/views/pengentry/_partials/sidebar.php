@@ -22,7 +22,7 @@
 			</li>
 
 			<li class="nav-item  ">
-				<a class="nav-link <?php echo $this->uri->segment(2) == 'lpj' ? 'active' : '' ?> " href="<?php echo site_url('admin/lpj') ?>">
+				<a class="nav-link <?php echo $this->uri->segment(2) == 'lpj' ? 'active' : '' ?> " href="<?php echo site_url('pengentry/Coklit/insert_data') ?>">
 					<div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
 						<i class="fa fa-book text-warning text-sm opacity-10"></i>
 					</div>
