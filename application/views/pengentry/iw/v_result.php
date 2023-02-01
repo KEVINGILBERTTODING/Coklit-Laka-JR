@@ -63,9 +63,9 @@
 
 						</div>
 						<div class="container-md containerku">
-							<div class="table-responsive tb-iwkl p-0">
+							<div class="table-responsive  tb-iwkl p-0">
 								<h5 class="mt-2">Result</h5>
-								<table class="table align-items-center mt-3 mb-0" id="tbl_result">
+								<table class="table table-striped align-items-center mt-3 mb-0" id="tbl_result">
 									<thead>
 										<tr>
 											<th class="text-uppercase text-xxs font-weight-bolder ">No</th>
@@ -313,7 +313,13 @@
 
 	<script>
 		$(document).ready(function() {
-			$('#tbl_result').DataTable();
+			$('#tbl_result').DataTable({
+				lengthMenu: [
+					[-1],
+					["All"]
+				]
+			});
+
 
 		});
 	</script>
