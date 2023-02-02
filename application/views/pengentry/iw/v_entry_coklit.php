@@ -60,11 +60,11 @@
 							<div class="row mt-3 d-flex flex-row-reverse">
 
 								<div class="col col-md-2">
-									<button class="btn btn-info  btn-sm" data-bs-toggle="modal" data-bs-target="#setting_iwkl">
+									<button class="btn btn-info  btn-sm" data-bs-toggle="modal" data-bs-target="#setting_dasi">
 										Pengaturan Excel Dasi
 								</div>
 								<div class="col col-md-2">
-									<button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#setting_iwkbu">
+									<button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#setting_irms">
 										Pengaturan Excel IRMS
 								</div>
 
@@ -106,44 +106,74 @@
 			</div>
 
 
-			<!-- Modal entry detail user -->
-			<?php echo form_open_multipart('pengentry/iw/update_batch_setting_iwkbu'); ?>
-			<div class="modal fade" id="setting_iwkbu" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+			<!-- Modal update setting irms -->
+			<?php echo form_open_multipart('pengentry/Coklit/update_setting'); ?>
+			<div class="modal fade" id="setting_irms" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 				<div class="modal-dialog modal-dialog-scrollable">
 					<div class="modal-content">
 						<div class="modal-header">
-							<h6 class="modal-title" id="exampleModalLabel">Pengaturan Data Excel IWKBU</h6>
+							<h6 class="modal-title" id="exampleModalLabel">Pengaturan Data Excel IRMS</h6>
 							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
 						</div>
 						<div class="modal-body">
 							<div class="form-group" hidden>
-								<input class="form-control user_id" id="user_id" name="user_id" value="" readonly>
+								<input class="form-control user_id" id="id" name="id" value="<?php echo $setting_irms['id']; ?>">
 							</div>
 
 
 							<div class="div d-flex justify-content-center">
 								<lottie-player class="text-center" src="https://assets10.lottiefiles.com/packages/lf20_nUTP5Vd52q.json" background="transparent" speed="1" style="width: 300px; height: 300px;" loop autoplay></lottie-player>
 							</div>
-							<?php foreach ($setting_iwkbu as $setting_iwkbu) : ?>
-								<h6><?= $setting_iwkbu->name; ?></h6>
-								<label for="Col">Col<span class="text-danger">*</span></label>
-								<div class="form-group">
-									<input class="form-control nama_lengkap" id="col" name="id_<?= $setting_iwkbu->id; ?>" value="<?= $setting_iwkbu->id; ?>" hidden>
-									<input class="form-control nama_lengkap" type="number" id="col" name="col_<?= $setting_iwkbu->id; ?>" value="<?= $setting_iwkbu->col; ?>" required>
+
+							<div class="row">
+								<div class="col">
+
+									<label for="Col">Col Tanggal<span class="text-danger">*</span></label>
+									<div class="form-group">
+
+										<input class="form-control " type="number" id="col" name="col_tanggal" value="<?= $setting_irms['col_tanggal']; ?>" required>
+									</div>
 								</div>
 
-								<label for="Col">Row start<span class="text-danger">*</span></label>
-								<div class="form-group">
-									<input class="form-control nama_lengkap" type="number" id="col" name="row_start_<?= $setting_iwkbu->id; ?>" value="<?= $setting_iwkbu->row_start; ?>" required>
+								<div class="col">
+
+									<label for="Col">Col Korban<span class="text-danger">*</span></label>
+									<div class="form-group">
+
+										<input class="form-control " type="number" id="col" name="col_korban" value="<?= $setting_irms['col_korban']; ?>" required>
+									</div>
 								</div>
 
-								<label for="Col">Row end<span class="text-danger">*</span></label>
-								<div class="form-group">
-									<input class="form-control nama_lengkap" type="number" id="col" name="row_end_<?= $setting_iwkbu->id; ?>" value="<?= $setting_iwkbu->row_end; ?>" required>
+								<div class="col">
+
+									<label for="Col">Col Cidera<span class="text-danger">*</span></label>
+									<div class="form-group">
+
+										<input class="form-control " type="number" id="col" name="col_cidera" value="<?= $setting_irms['col_cidera']; ?>" required>
+									</div>
 								</div>
 
+								<div class="col">
 
-							<?php endforeach; ?>
+									<label for="Col">Col No LP<span class="text-danger">*</span></label>
+									<div class="form-group">
+
+										<input class="form-control " type="number" id="col" name="col_no_lp" value="<?= $setting_irms['col_no_lp']; ?>" required>
+									</div>
+								</div>
+
+								<div class="col">
+									<label for="Col">Row start<span class="text-danger">*</span></label>
+									<div class="form-group">
+										<input class="form-control " type="number" id="name_row" name="row_start" value="<?= $setting_irms['row_start']; ?>" required>
+									</div>
+								</div>
+							</div>
+
+
+
+							<input class="form-control " name="table" value="irms_excel_setting" required hidden>
+
 
 
 						</div>
@@ -158,44 +188,76 @@
 			<?php echo form_close(); ?>
 
 
-			<?php echo form_open_multipart('pengentry/iw/update_batch_setting_iwkl'); ?>
-			<div class="modal fade" id="setting_iwkl" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+
+
+
+
+			<!-- Modal update setting dasi -->
+			<?php echo form_open_multipart('pengentry/Coklit/update_setting'); ?>
+			<div class="modal fade" id="setting_dasi" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 				<div class="modal-dialog modal-dialog-scrollable">
 					<div class="modal-content">
 						<div class="modal-header">
-							<h6 class="modal-title" id="exampleModalLabel">Pengaturan Data Excel IWKL</h6>
+							<h6 class="modal-title" id="exampleModalLabel">Pengaturan Data Excel Dasi</h6>
 							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
 						</div>
 						<div class="modal-body">
 							<div class="form-group" hidden>
-								<input class="form-control user_id" id="user_id" name="user_id" value="" readonly>
+								<input class="form-control user_id" id="id" name="id" value="<?php echo $setting_dasi['id']; ?>">
 							</div>
 
 
 							<div class="div d-flex justify-content-center">
 								<lottie-player class="text-center" src="https://assets10.lottiefiles.com/packages/lf20_nUTP5Vd52q.json" background="transparent" speed="1" style="width: 300px; height: 300px;" loop autoplay></lottie-player>
 							</div>
-							<?php foreach ($setting_iwkl as $setting_iwkl) : ?>
-								<h6><?= $setting_iwkl->name; ?></h6>
-								<label for="Col">Col<span class="text-danger">*</span></label>
-								<div class="form-group">
-									<input class="form-control nama_lengkap" id="col" name="id_<?= $setting_iwkl->id; ?>" value="<?= $setting_iwkl->id; ?>" hidden>
-									<input class="form-control nama_lengkap" type="number" id="col" name="col_<?= $setting_iwkl->id; ?>" value="<?= $setting_iwkl->col; ?>" required>
+							<div class="row">
+								<div class="col">
+
+									<label for="Col">Col Tanggal<span class="text-danger">*</span></label>
+									<div class="form-group">
+
+										<input class="form-control " type="number" id="col" name="col_tanggal" value="<?= $setting_dasi['col_tanggal']; ?>" required>
+									</div>
 								</div>
 
-								<label for="Col">Row start<span class="text-danger">*</span></label>
-								<div class="form-group">
-									<input class="form-control nama_lengkap" type="number" id="col" name="row_start_<?= $setting_iwkl->id; ?>" value="<?= $setting_iwkl->row_start; ?>" required>
+								<div class="col">
+
+									<label for="Col">Col Korban<span class="text-danger">*</span></label>
+									<div class="form-group">
+
+										<input class="form-control " type="number" id="col" name="col_korban" value="<?= $setting_dasi['col_korban']; ?>" required>
+									</div>
 								</div>
 
-								<label for="Col">Row end<span class="text-danger">*</span></label>
-								<div class="form-group">
-									<input class="form-control nama_lengkap" type="number" id="col" name="row_end_<?= $setting_iwkl->id; ?>" value="<?= $setting_iwkl->row_end; ?>" required>
+								<div class="col">
+
+									<label for="Col">Col Cidera<span class="text-danger">*</span></label>
+									<div class="form-group">
+
+										<input class="form-control " type="number" id="col" name="col_cidera" value="<?= $setting_dasi['col_cidera']; ?>" required>
+									</div>
 								</div>
 
+								<div class="col">
 
-							<?php endforeach; ?>
+									<label for="Col">Col No LP<span class="text-danger">*</span></label>
+									<div class="form-group">
 
+										<input class="form-control " type="number" id="col" name="col_no_lp" value="<?= $setting_dasi['col_no_lp']; ?>" required>
+									</div>
+								</div>
+
+								<div class="col">
+									<label for="Col">Row start<span class="text-danger">*</span></label>
+									<div class="form-group">
+										<input class="form-control " type="number" id="name_row" name="row_start" value="<?= $setting_dasi['row_start']; ?>" required>
+									</div>
+								</div>
+							</div>
+
+
+
+							<input class="form-control " name="table" value="dasi_excel_setting" required hidden>
 
 						</div>
 						<div class="modal-footer">
@@ -207,6 +269,9 @@
 
 			</div>
 			<?php echo form_close(); ?>
+
+
+
 
 
 

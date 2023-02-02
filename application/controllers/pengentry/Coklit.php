@@ -31,13 +31,14 @@ class Coklit extends CI_Controller
 	public function insert_data()
 	{
 
-		// $data['dasi_setting'] = $this->Excel_model->get_setting('dasi_excel_setting');
-		// $data['setting_irms'] = $this->Excel_model->get_setting('irms_excel_setting');
+		$data['setting_dasi'] = $this->Excel_model->get_setting_by_id('dasi_excel_setting', 1);
+		$data['setting_irms'] = $this->Excel_model->get_setting_by_id('irms_excel_setting', 1);
 
-		$this->load->view('pengentry/iw/v_entry_coklit');
+		$this->load->view('pengentry/iw/v_entry_coklit', $data);
 	}
 	public function index($irms_id, $dasi_id)
 	{
+
 		$data['result'] = $this->Coklit_model->formula_coklit($irms_id, $dasi_id);
 		$data['irms_id'] = $irms_id;
 		$data['dasi_id'] = $dasi_id;
@@ -51,10 +52,7 @@ class Coklit extends CI_Controller
 		// $setting_iwkbu_tahun_sebelumnya = $this->Excel_model->get_setting_excel_by_id('excel_iwkbu_setting', 2);
 		// $setting_iwkbu_4_tahun_sebelumnya = $this->Excel_model->get_setting_excel_by_id('excel_iwkbu_setting', 3);
 
-		// load setting excel iwkl
-		// $setting_iwkl_tahun_sekarang = $this->Excel_model->get_setting_excel_by_id('excel_iwkl_setting', 1);
-		// $setting_iwkl_tahun_sebelumnya = $this->Excel_model->get_setting_excel_by_id('excel_iwkl_setting', 2);
-		// $setting_iwkl_4_tahun_sebelumnya = $this->Excel_model->get_setting_excel_by_id('excel_iwkl_setting', 3);
+
 
 		if (isset($_FILES["fileExcelIrms"]["name"])) {
 			$path = $_FILES["fileExcelIrms"]["tmp_name"];
@@ -66,10 +64,6 @@ class Coklit extends CI_Controller
 				$highestRow = $worksheet->getHighestRow();
 				$highestColumn = $worksheet->getHighestColumn();
 
-				// IWKBU tahun saat ini
-				// $row_iwkbu_tahun_sekarang = $setting_iwkbu_tahun_sekarang['row_start'];
-				// $highestRow_iwkbu_tahun_sekarang = $setting_iwkbu_tahun_sekarang['row_end'];
-				// $column_iwkbu_tahun_sekarang = $setting_iwkbu_tahun_sekarang['col'];
 				for ($row = 3; $row <= $highestRow; $row++) {
 					$tanggal_dasi = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
 					$korban_dasi = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
@@ -107,10 +101,6 @@ class Coklit extends CI_Controller
 						$no_lp_irms = $this->get_explode_no_lp($worksheet->getCellByColumnAndRow(6, $row)->getValue());
 
 
-
-
-
-
 						$data_coklit_dasi[] = array(
 							'dasi_id' => $uniq_id_dasi,
 							'tanggal' => $tanggal_irms,
@@ -141,66 +131,25 @@ class Coklit extends CI_Controller
 		redirect('pengentry/Coklit/insert_data');
 	}
 
-
-
-
-
-
-	public function update_batch_setting_iwkbu()
+	public function update_setting()
 	{
 		$data = array(
-			array(
-				'id' => $this->input->post('id_1'),
-				'col' => $this->input->post('col_1'),
-				'row_end' => $this->input->post('row_end_1'),
-				'row_start' => $this->input->post('row_start_1')
-			),
-			array(
-				'id' => $this->input->post('id_2'),
-				'col' => $this->input->post('col_2'),
-				'row_end' => $this->input->post('row_end_2'),
-				'row_start' => $this->input->post('row_start_2')
-			),
-			array(
-				'id' => $this->input->post('id_3'),
-				'col' => $this->input->post('col_3'),
-				'row_end' => $this->input->post('row_end_3'),
-				'row_start' => $this->input->post('row_start_3')
-			),
+			'row_start' => $this->input->post('row_start'),
+			'col_tanggal' => $this->input->post('col_tanggal'),
+			'col_korban' => $this->input->post('col_korban'),
+			'col_cidera' => $this->input->post('col_cidera'),
+			'col_no_lp' => $this->input->post('col_no_lp')
+
 		);
 
-		$this->Excel_model->update_data_batch($data, 'id', 'excel_iwkbu_setting');
-		$this->session->set_flashdata('message', 'Data berhasil diperbaharui');
-		redirect('pengentry/iw');
+		$this->Excel_model->update_setting($this->input->post('table'), $data, $this->input->post('id'));
+		$this->session->set_flashdata('message', "Berhasil mengubah setting");
+		redirect('pengentry/Coklit/insert_data');
 	}
 
-	public function update_batch_setting_iwkl()
-	{
-		$data = array(
-			array(
-				'id' => $this->input->post('id_1'),
-				'col' => $this->input->post('col_1'),
-				'row_end' => $this->input->post('row_end_1'),
-				'row_start' => $this->input->post('row_start_1')
-			),
-			array(
-				'id' => $this->input->post('id_2'),
-				'col' => $this->input->post('col_2'),
-				'row_end' => $this->input->post('row_end_2'),
-				'row_start' => $this->input->post('row_start_2')
-			),
-			array(
-				'id' => $this->input->post('id_3'),
-				'col' => $this->input->post('col_3'),
-				'row_end' => $this->input->post('row_end_3'),
-				'row_start' => $this->input->post('row_start_3')
-			),
-		);
 
-		$this->Excel_model->update_data_batch($data, 'id', 'excel_iwkl_setting');
-		$this->session->set_flashdata('message', 'Data berhasil diperbaharui');
-		redirect('pengentry/iw');
-	}
+
+
 
 	public function get_explode_no_lp($no_lp)
 	{
