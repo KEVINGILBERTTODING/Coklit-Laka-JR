@@ -47,10 +47,8 @@ class Coklit extends CI_Controller
 
 	public function import_excel()
 	{
-		// Load setting excel iwkbu
-		// $setting_iwkbu_tahun_sekarang = $this->Excel_model->get_setting_excel_by_id('excel_iwkbu_setting', 1);
-		// $setting_iwkbu_tahun_sebelumnya = $this->Excel_model->get_setting_excel_by_id('excel_iwkbu_setting', 2);
-		// $setting_iwkbu_4_tahun_sebelumnya = $this->Excel_model->get_setting_excel_by_id('excel_iwkbu_setting', 3);
+		// Load setting excel irms
+		$setting_irms = $this->Excel_model->get_setting_by_id('irms_excel_setting', 1);
 
 
 
@@ -63,12 +61,18 @@ class Coklit extends CI_Controller
 
 				$highestRow = $worksheet->getHighestRow();
 				$highestColumn = $worksheet->getHighestColumn();
+				$row = $setting_irms['row_start'];
+				$col_tanggal = $setting_irms['col_tanggal'];
+				$col_korban = $setting_irms['col_korban'];
+				$col_cidera = $setting_irms['col_cidera'];
+				$col_no_lp = $setting_irms['col_no_lp'];
 
-				for ($row = 3; $row <= $highestRow; $row++) {
-					$tanggal_dasi = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
-					$korban_dasi = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
-					$cidera_dasi = $worksheet->getCellByColumnAndRow(4, $row)->getValue();
-					$no_lp_dasi = $this->get_explode_no_lp($worksheet->getCellByColumnAndRow(6, $row)->getValue());
+
+				for ($row = $row; $row <= $highestRow; $row++) {
+					$tanggal_dasi = $worksheet->getCellByColumnAndRow($col_tanggal, $row)->getValue();
+					$korban_dasi = $worksheet->getCellByColumnAndRow($col_korban, $row)->getValue();
+					$cidera_dasi = $worksheet->getCellByColumnAndRow($col_cidera, $row)->getValue();
+					$no_lp_dasi = $this->get_explode_no_lp($worksheet->getCellByColumnAndRow($col_no_lp, $row)->getValue());
 
 					$data_coklit_irms[] = array(
 						'irms_id' => $uniq_id_irms,
@@ -85,20 +89,22 @@ class Coklit extends CI_Controller
 				$object = PHPExcel_IOFactory::load($path);
 				$uniq_id_dasi = md5(uniqid(rand(), true));
 				foreach ($object->getWorksheetIterator() as $worksheet) {
-					// $highestRow = $worksheet->getHighestRow();
 
 					$highestRow = $worksheet->getHighestRow();
 					$highestColumn = $worksheet->getHighestColumn();
+					$setting_dasi = $this->Excel_model->get_setting_by_id('dasi_excel_setting', 1);
+					$row = $setting_dasi['row_start'];
+					$col_tanggal = $setting_dasi['col_tanggal'];
+					$col_korban = $setting_dasi['col_korban'];
+					$col_cidera = $setting_dasi['col_cidera'];
+					$col_no_lp = $setting_dasi['col_no_lp'];
 
-					// IWKBU tahun saat ini
-					// $row_iwkbu_tahun_sekarang = $setting_iwkbu_tahun_sekarang['row_start'];
-					// $highestRow_iwkbu_tahun_sekarang = $setting_iwkbu_tahun_sekarang['row_end'];
-					// $column_iwkbu_tahun_sekarang = $setting_iwkbu_tahun_sekarang['col'];
-					for ($row = 3; $row <= $highestRow; $row++) {
-						$tanggal_irms = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
-						$korban_irms = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
-						$cidera_irms = $worksheet->getCellByColumnAndRow(4, $row)->getValue();
-						$no_lp_irms = $this->get_explode_no_lp($worksheet->getCellByColumnAndRow(6, $row)->getValue());
+
+					for ($row = $row; $row <= $highestRow; $row++) {
+						$tanggal_irms = $worksheet->getCellByColumnAndRow($col_tanggal, $row)->getValue();
+						$korban_irms = $worksheet->getCellByColumnAndRow($col_korban, $row)->getValue();
+						$cidera_irms = $worksheet->getCellByColumnAndRow($col_cidera, $row)->getValue();
+						$no_lp_irms = $this->get_explode_no_lp($worksheet->getCellByColumnAndRow($col_no_lp, $row)->getValue());
 
 
 						$data_coklit_dasi[] = array(
