@@ -131,11 +131,8 @@
 										</tbody>
 									</table>
 
-									<div class="mt-4">
-										<button class='btn btn-warning w-100' id="btn_submit" type="submit">
-											<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-											Update Data
-										</button>
+									<div class="mt-4 w-100">
+										<a class="btn  mt-2 btn-danger w-100" href="<?= base_url('pengentry/Coklit/delete/' . $irms_id . '/' . $dasi_id) ?>">Hapus</a>
 									</div>
 
 								</div>

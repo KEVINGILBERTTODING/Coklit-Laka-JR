@@ -10,14 +10,14 @@ class Coklit_model extends CI_Model
 		}
 	}
 
-	public function formula_coklit()
+	public function formula_coklit($irms_id, $dasi_id)
 	{
 		$this->db->select('
 		irms.no_lp as irms_no_lp,  irms.tanggal as irms_tanggal, irms.nama_korban as irms_nama_korban, irms.cidera as irms_cidera,
 		 dasi.no_lp as dasi_no_lp, dasi.tanggal as dasi_tanggal, dasi.nama_korban as dasi_nama_korban, dasi.cidera as dasi_cidera
 		');
 		$this->db->from('irms');
-		$this->db->where('irms_id', 'a');
+		$this->db->where('irms_id', $irms_id);
 		$this->db->join('dasi', 'soundex(trim(lower(replace(substring_index(irms.nama_korban, "(", 1), "(", "")))) = soundex(trim(lower(replace(substring_index(dasi.nama_korban, "(", 1), "(", "")))) and irms.no_lp = dasi.no_lp', 'left');
 		$left_join = $this->db->get_compiled_select();
 		$this->db->select('
@@ -25,10 +25,17 @@ class Coklit_model extends CI_Model
 		 dasi.no_lp as dasi_no_lp, dasi.tanggal as dasi_tanggal, dasi.nama_korban as dasi_nama_korban, dasi.cidera as dasi_cidera
 		');
 		$this->db->from('irms');
+		$this->db->where('dasi_id', $dasi_id);
 		$this->db->join('dasi', 'soundex(trim(lower(replace(substring_index(irms.nama_korban, "(", 1), "(", "")))) = soundex(trim(lower(replace(substring_index(dasi.nama_korban, "(", 1), "(", "")))) and irms.no_lp = dasi.no_lp', 'right');
 		$right_join = $this->db->get_compiled_select();
 		$full_join = $left_join . ' UNION ' . $right_join;
 		$query = $this->db->query($full_join);
 		return $query->result();
+	}
+
+	public function delete($table, $nama_id, $id)
+	{
+		$this->db->where($nama_id, $id);
+		$this->db->delete($table);
 	}
 }

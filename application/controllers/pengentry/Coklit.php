@@ -36,11 +36,14 @@ class Coklit extends CI_Controller
 
 		$this->load->view('pengentry/iw/v_entry_coklit');
 	}
-	public function index()
+	public function index($irms_id, $dasi_id)
 	{
-		$data['result'] = $this->Coklit_model->formula_coklit();
+		$data['result'] = $this->Coklit_model->formula_coklit($irms_id, $dasi_id);
+		$data['irms_id'] = $irms_id;
+		$data['dasi_id'] = $dasi_id;
 		$this->load->view('pengentry/iw/v_result', $data);
 	}
+
 	public function import_excel()
 	{
 		// Load setting excel iwkbu
@@ -74,7 +77,7 @@ class Coklit extends CI_Controller
 					$no_lp_dasi = $this->get_explode_no_lp($worksheet->getCellByColumnAndRow(6, $row)->getValue());
 
 					$data_coklit_irms[] = array(
-						'irms_id' => 'a',
+						'irms_id' => $uniq_id_irms,
 						'tanggal' => $tanggal_dasi,
 						'nama_korban' => $korban_dasi,
 						'cidera' => $cidera_dasi,
@@ -109,7 +112,7 @@ class Coklit extends CI_Controller
 
 
 						$data_coklit_dasi[] = array(
-							'dasi_id' => 'a',
+							'dasi_id' => $uniq_id_dasi,
 							'tanggal' => $tanggal_irms,
 							'nama_korban' => $korban_irms,
 							'cidera' => $cidera_irms,
@@ -122,13 +125,23 @@ class Coklit extends CI_Controller
 				$this->Coklit_model->insert('dasi', $data_coklit_dasi);
 				$this->Coklit_model->insert('irms', $data_coklit_irms);
 				$this->session->set_flashdata('message', "Berhasil menyimpan data");
-				redirect('pengentry/Coklit');
+				redirect('pengentry/Coklit/index/' . $uniq_id_irms . '/' . $uniq_id_dasi);
 			} else {
 				$this->session->set_flashdata('upload_error', 'Gagal mengirim berkas');
-				redirect('pengentry/Coklit');
+				redirect('pengentry/Coklit/insert_data');
 			}
 		}
 	}
+
+	public function delete($irms_id, $dasi_id)
+	{
+		$this->Coklit_model->delete('irms', 'irms_id', $irms_id);
+		$this->Coklit_model->delete('dasi', 'dasi_id', $dasi_id);
+		$this->session->set_flashdata('message', "Berhasil menghapus data");
+		redirect('pengentry/Coklit/insert_data');
+	}
+
+
 
 
 
