@@ -63,60 +63,88 @@
 
 						</div>
 						<div class="container-md containerku">
-							<div class="table-responsive  tb-iwkl p-0">
-								<h5 class="mt-2">Result</h5>
-								<table class="table table-striped align-items-center mt-3 mb-0" id="tbl_result">
-									<thead>
-										<tr>
-											<th class="text-uppercase text-xxs font-weight-bolder ">No</th>
-											<th class="text-uppercase text-xxs font-weight-bolder ">Tanggal Irms</th>
-											<th class="text-uppercase text-xxs font-weight-bolder  ps-2">Korban Irms</th>
-											<th class="text-uppercase text-xxs font-weight-bolder  ps-2">Cidera</th>
-											<th class="text-uppercase text-xxs font-weight-bolder  ps-2">No LP</th>
-											<th></th>
+							<?php
 
-											<th class="text-uppercase text-xxs font-weight-bolder ">No</th>
-											<th class="text-uppercase text-xxs font-weight-bolder ">Tanggal Dasi</th>
-											<th class="text-uppercase text-xxs font-weight-bolder  ps-2">Korban Dasi</th>
-											<th class="text-uppercase text-xxs font-weight-bolder  ps-2">Cidera</th>
-											<th class="text-uppercase text-xxs font-weight-bolder  ps-2">No LP</th>
-
-										</tr>
-									</thead>
-
-									<tbody>
-
-										<?php $no = 1; ?>
-										<?php $no_dasi = 1; ?>
-
-										<?php foreach ($result  as $r) { ?>
-											<tr>
-												<td><?= $no++; ?></td>
-												<td><?= $r->irms_tanggal; ?></td>
-												<td><?= $r->irms_nama_korban; ?></td>
-												<td><?= $r->irms_cidera; ?></td>
-												<td><?= $r->irms_no_lp; ?></td>
-												<td></td>
-												<td><?= $no_dasi++; ?></td>
-												<td><?= $r->dasi_tanggal; ?></td>
-												<td><?= $r->dasi_nama_korban; ?></td>
-												<td><?= $r->dasi_cidera; ?></td>
-												<td><?= $r->dasi_no_lp; ?></td>
-
-											</tr>
-
-										<?php } ?>
-									</tbody>
-								</table>
-
-								<div class="mt-4">
-									<button class='btn btn-warning w-100' id="btn_submit" type="submit">
-										<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-										Update Data
-									</button>
+							if ($result == null) { ?>
+								<!-- <div class="alert alert-danger" role="alert">
+									<h4 class="alert-heading">Data tidak ditemukan!</h4>
+									<p>Maaf, data yang anda cari tidak ditemukan. Silahkan coba lagi.</p>
+									<hr>
+									<p class="mb-0">Jika anda yakin data yang anda cari ada, silahkan hubungi admin.</p>
+								</div> -->
+								<div class="text-center">
+									<div class="d-flex justify-content-center"><lottie-player src="https://assets6.lottiefiles.com/packages/lf20_agnejizn.json" mode="bounce" background="transparent" speed="1" style="width: 300px; height: 300px;" loop autoplay></lottie-player></div>
 								</div>
 
-							</div>
+								<div class='text-warning text-center mt-3'>
+									<h5>Data tidak ditemukan!</h5>
+									<p>Maaf, data yang anda cari tidak ditemukan. Silahkan coba lagi.</p>
+								</div>
+								<div class="text-center ">
+									<a class="btn btn-primary d-flex justify-content-center w-100" href="<?= base_url('pengentry/Coklit/insert_data') ?>">Kembali</a>
+
+								</div>
+							<?php } else { ?>
+								<div class="table-responsive  tb-iwkl p-0">
+									<h5 class="mt-2">Result</h5>
+									<table class="table table-striped align-items-center mt-3 mb-0" id="tbl_result">
+										<thead>
+											<tr>
+												<th class="text-uppercase text-xxs font-weight-bolder ">No</th>
+												<th class="text-uppercase text-xxs font-weight-bolder ">Tanggal Irms</th>
+												<th class="text-uppercase text-xxs font-weight-bolder  ps-2">Korban Irms</th>
+												<th class="text-uppercase text-xxs font-weight-bolder  ps-2">Cidera</th>
+												<th class="text-uppercase text-xxs font-weight-bolder  ps-2">No LP</th>
+												<th></th>
+
+												<th class="text-uppercase text-xxs font-weight-bolder ">No</th>
+												<th class="text-uppercase text-xxs font-weight-bolder ">Tanggal Dasi</th>
+												<th class="text-uppercase text-xxs font-weight-bolder  ps-2">Korban Dasi</th>
+												<th class="text-uppercase text-xxs font-weight-bolder  ps-2">Cidera</th>
+												<th class="text-uppercase text-xxs font-weight-bolder  ps-2">No LP</th>
+
+											</tr>
+										</thead>
+
+										<tbody>
+
+											<?php $no = 1; ?>
+											<?php $no_dasi = 1; ?>
+
+											<?php foreach ($result  as $r) { ?>
+												<tr>
+													<td><?= $no++; ?></td>
+													<td><?= $r->irms_tanggal; ?></td>
+													<td><?= $r->irms_nama_korban; ?></td>
+													<td><?= $r->irms_cidera; ?></td>
+													<td><?= $r->irms_no_lp; ?></td>
+													<td></td>
+													<td><?= $no_dasi++; ?></td>
+													<td><?= $r->dasi_tanggal; ?></td>
+													<td><?= $r->dasi_nama_korban; ?></td>
+													<td><?= $r->dasi_cidera; ?></td>
+													<td><?= $r->dasi_no_lp; ?></td>
+
+												</tr>
+
+											<?php } ?>
+										</tbody>
+									</table>
+
+									<div class="mt-4">
+										<button class='btn btn-warning w-100' id="btn_submit" type="submit">
+											<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+											Update Data
+										</button>
+									</div>
+
+								</div>
+							<?php }
+
+
+
+							?>
+
 
 						</div>
 					</div>

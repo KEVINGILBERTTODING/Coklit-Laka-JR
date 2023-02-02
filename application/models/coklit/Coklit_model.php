@@ -17,6 +17,7 @@ class Coklit_model extends CI_Model
 		 dasi.no_lp as dasi_no_lp, dasi.tanggal as dasi_tanggal, dasi.nama_korban as dasi_nama_korban, dasi.cidera as dasi_cidera
 		');
 		$this->db->from('irms');
+		$this->db->where('irms_id', 'a');
 		$this->db->join('dasi', 'soundex(trim(lower(replace(substring_index(irms.nama_korban, "(", 1), "(", "")))) = soundex(trim(lower(replace(substring_index(dasi.nama_korban, "(", 1), "(", "")))) and irms.no_lp = dasi.no_lp', 'left');
 		$left_join = $this->db->get_compiled_select();
 		$this->db->select('

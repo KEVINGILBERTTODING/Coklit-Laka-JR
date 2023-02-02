@@ -73,13 +73,8 @@ class Coklit extends CI_Controller
 					$cidera_dasi = $worksheet->getCellByColumnAndRow(4, $row)->getValue();
 					$no_lp_dasi = $this->get_explode_no_lp($worksheet->getCellByColumnAndRow(6, $row)->getValue());
 
-
-
-
-
-
 					$data_coklit_irms[] = array(
-						'irms_id' => $uniq_id_irms,
+						'irms_id' => 'a',
 						'tanggal' => $tanggal_dasi,
 						'nama_korban' => $korban_dasi,
 						'cidera' => $cidera_dasi,
@@ -114,7 +109,7 @@ class Coklit extends CI_Controller
 
 
 						$data_coklit_dasi[] = array(
-							'dasi_id' => $uniq_id_dasi,
+							'dasi_id' => 'a',
 							'tanggal' => $tanggal_irms,
 							'nama_korban' => $korban_irms,
 							'cidera' => $cidera_irms,
