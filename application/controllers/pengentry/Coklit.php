@@ -56,7 +56,7 @@ class Coklit extends CI_Controller
 		if (isset($_FILES["fileExcelIrms"]["name"])) {
 			$path = $_FILES["fileExcelIrms"]["tmp_name"];
 			$object = PHPExcel_IOFactory::load($path);
-			$kode_loket = 1;
+			$uniq_id_irms = md5(uniqid(rand(), true));
 			foreach ($object->getWorksheetIterator() as $worksheet) {
 				// $highestRow = $worksheet->getHighestRow();
 
@@ -76,7 +76,10 @@ class Coklit extends CI_Controller
 
 
 
-					$data_coklit_dasi[] = array(
+
+
+					$data_coklit_irms[] = array(
+						'irms_id' => $uniq_id_irms,
 						'tanggal' => $tanggal_dasi,
 						'nama_korban' => $korban_dasi,
 						'cidera' => $cidera_dasi,
@@ -85,10 +88,10 @@ class Coklit extends CI_Controller
 				}
 			}
 
-			if (isset($_FILES["fileExcelIrms"]["name"])) {
-				$path = $_FILES["fileExcelIrms"]["tmp_name"];
+			if (isset($_FILES["fileExcelDasi"]["name"])) {
+				$path = $_FILES["fileExcelDasi"]["tmp_name"];
 				$object = PHPExcel_IOFactory::load($path);
-				$kode_loket = 1;
+				$uniq_id_dasi = md5(uniqid(rand(), true));
 				foreach ($object->getWorksheetIterator() as $worksheet) {
 					// $highestRow = $worksheet->getHighestRow();
 
@@ -108,7 +111,10 @@ class Coklit extends CI_Controller
 
 
 
-						$data_coklit_irms[] = array(
+
+
+						$data_coklit_dasi[] = array(
+							'dasi_id' => $uniq_id_dasi,
 							'tanggal' => $tanggal_irms,
 							'nama_korban' => $korban_irms,
 							'cidera' => $cidera_irms,
