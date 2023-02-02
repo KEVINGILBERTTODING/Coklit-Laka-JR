@@ -76,18 +76,19 @@
 
 						</div>
 						<div class="container-md containerku">
+							<span class="text-danger text-sm fst-italic">*Jika ada perubahan format excel, silahkan lakukan pengaturan terlebih dahulu.</span>
 							<form action="<?= base_url('pengentry/Coklit/import_excel'); ?>" method="post" enctype="multipart/form-data">
 
 								<div class="row">
 									<div class="col">
 										<div class="form-group" id="form_input_file">
-											<label>Pilih File IRMS</label>
+											<h6>File Excel IRMS</h6>
 											<input class="form-control " type="file" id="input_file" name="fileExcelIrms" accept=".xls, .xlsx" required>
 										</div>
 									</div>
 									<div class="col">
 										<div class="form-group" id="form_input_file">
-											<label>Pilih File DASI</label>
+											<h6>File Excel DASI</h6>
 											<input class="form-control " type="file" id="input_file" name="fileExcelDasi" accept=".xls, .xlsx" required>
 										</div>
 									</div>
