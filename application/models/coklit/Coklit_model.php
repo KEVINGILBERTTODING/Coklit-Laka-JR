@@ -19,6 +19,8 @@ class Coklit_model extends CI_Model
 		$this->db->from('irms');
 		$this->db->where('irms_id', $irms_id);
 		$this->db->join('dasi', 'soundex(trim(lower(replace(substring_index(irms.nama_korban, "(", 1), "(", "")))) = soundex(trim(lower(replace(substring_index(dasi.nama_korban, "(", 1), "(", "")))) and irms.no_lp = dasi.no_lp', 'left');
+
+
 		$left_join = $this->db->get_compiled_select();
 		$this->db->select('
 		irms.no_lp as irms_no_lp,  irms.tanggal as irms_tanggal, irms.nama_korban as irms_nama_korban, irms.cidera as irms_cidera,
@@ -27,6 +29,8 @@ class Coklit_model extends CI_Model
 		$this->db->from('irms');
 		$this->db->where('dasi_id', $dasi_id);
 		$this->db->join('dasi', 'soundex(trim(lower(replace(substring_index(irms.nama_korban, "(", 1), "(", "")))) = soundex(trim(lower(replace(substring_index(dasi.nama_korban, "(", 1), "(", "")))) and irms.no_lp = dasi.no_lp', 'right');
+		// $this->db->join('dasi', 'levenstein_stor(irms.nama_korban, dasi.nama_korban) <= 3 and irms.no_lp = dasi.no_lp', 'right');
+
 		$right_join = $this->db->get_compiled_select();
 		$full_join = $left_join . ' UNION ' . $right_join;
 		$query = $this->db->query($full_join);
@@ -37,5 +41,74 @@ class Coklit_model extends CI_Model
 	{
 		$this->db->where($nama_id, $id);
 		$this->db->delete($table);
+	}
+
+
+	public function count_md_irms($id)
+	{
+		$sql = ("SELECT * FROM irms WHERE irms_id = ? AND (cidera = 'MD' OR cidera = 'MD-LL');");
+		$query = $this->db->query($sql, array($id));
+		$result = $query->num_rows();
+		return $result;
+	}
+
+	public function count_md_dasi($id)
+	{
+
+
+		$sql = ("SELECT * FROM dasi WHERE dasi_id = ? AND (cidera = 'MD' OR cidera = 'MD-LL');");
+		$query = $this->db->query($sql, array($id));
+		$result = $query->num_rows();
+		return $result;
+	}
+
+
+	public function count_ll_irms($id)
+	{
+		$this->db->select('*');
+		$this->db->from('irms');
+		$this->db->where('irms_id', $id);
+		$this->db->where('cidera', 'LL');
+		$query = $this->db->get();
+		return $query->num_rows();
+	}
+
+	public function count_ll_dasi($id)
+	{
+		$this->db->select('*');
+		$this->db->from('dasi');
+		$this->db->where('dasi_id', $id);
+		$this->db->where('cidera', 'LL');
+		$query = $this->db->get();
+		return $query->num_rows();
+	}
+
+	public function levenstein_stor($nama_korban, $nama_korban2)
+	{
+		$nama_korban = strtolower($nama_korban);
+		$nama_korban2 = strtolower($nama_korban2);
+		$nama_korban = str_replace('(', '', $nama_korban);
+		$nama_korban2 = str_replace('(', '', $nama_korban2);
+		$nama_korban = str_replace(')', '', $nama_korban);
+		$nama_korban2 = str_replace(')', '', $nama_korban2);
+		$nama_korban = str_replace(' ', '', $nama_korban);
+		$nama_korban2 = str_replace(' ', '', $nama_korban2);
+		$nama_korban = str_replace('-', '', $nama_korban);
+		$nama_korban2 = str_replace('-', '', $nama_korban2);
+		$nama_korban = str_replace('.', '', $nama_korban);
+		$nama_korban2 = str_replace('.', '', $nama_korban2);
+		$nama_korban = str_replace(',', '', $nama_korban);
+		$nama_korban2 = str_replace(',', '', $nama_korban2);
+		$nama_korban = str_replace('\'', '', $nama_korban);
+		$nama_korban2 = str_replace('\'', '', $nama_korban2);
+		$nama_korban = str_replace('’', '', $nama_korban);
+		$nama_korban2 = str_replace('’', '', $nama_korban2);
+		$nama_korban = str_replace('’', '', $nama_korban);
+		$nama_korban2 = str_replace('’', '', $nama_korban2);
+		$nama_korban = str_replace('’', '', $nama_korban);
+		$nama_korban2 = str_replace('’', '', $nama_korban2);
+		$nama_korban = str_replace('’', '', $nama_korban);
+		$nama_korban2 = str_replace('’', '', $nama_korban2);
+		return levenshtein($nama_korban, $nama_korban2);
 	}
 }

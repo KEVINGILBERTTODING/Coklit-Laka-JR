@@ -42,12 +42,16 @@ class Coklit extends CI_Controller
 		$data['result'] = $this->Coklit_model->formula_coklit($irms_id, $dasi_id);
 		$data['irms_id'] = $irms_id;
 		$data['dasi_id'] = $dasi_id;
+		$data['total_md_irms'] = $this->Coklit_model->count_md_irms($irms_id);
+		$data['total_md_dasi'] = $this->Coklit_model->count_md_dasi($dasi_id);
+		$data['total_ll_irms'] = $this->Coklit_model->count_ll_irms($irms_id);
+		$data['total_ll_dasi'] = $this->Coklit_model->count_ll_dasi($dasi_id);
 		$this->load->view('pengentry/iw/v_result', $data);
 	}
 
 	public function import_excel()
 	{
-		// Load setting excel irms
+
 		$setting_irms = $this->Excel_model->get_setting_by_id('irms_excel_setting', 1);
 
 
@@ -55,7 +59,12 @@ class Coklit extends CI_Controller
 		if (isset($_FILES["fileExcelIrms"]["name"])) {
 			$path = $_FILES["fileExcelIrms"]["tmp_name"];
 			$object = PHPExcel_IOFactory::load($path);
-			$uniq_id_irms = md5(uniqid(rand(), true));
+			// $uniq_id_irms = md5(uniqid(rand(), true));
+			$jam_saat_ini = date('H:i:s');
+			$tanggal_saat_ini = date('Y-m-d');
+			$random_string = uniqid(rand(), true);
+
+			$irms_id  = $tanggal_saat_ini . $jam_saat_ini . $random_string;
 			foreach ($object->getWorksheetIterator() as $worksheet) {
 				// $highestRow = $worksheet->getHighestRow();
 
@@ -69,17 +78,18 @@ class Coklit extends CI_Controller
 
 
 				for ($row = $row; $row <= $highestRow; $row++) {
-					$tanggal_dasi = $worksheet->getCellByColumnAndRow($col_tanggal, $row)->getValue();
-					$korban_dasi = $worksheet->getCellByColumnAndRow($col_korban, $row)->getValue();
-					$cidera_dasi = $worksheet->getCellByColumnAndRow($col_cidera, $row)->getValue();
-					$no_lp_dasi = $this->get_explode_no_lp($worksheet->getCellByColumnAndRow($col_no_lp, $row)->getValue());
+					$tanggal_irms = $worksheet->getCellByColumnAndRow($col_tanggal, $row)->getValue();
+					$korban_irms = $worksheet->getCellByColumnAndRow($col_korban, $row)->getValue();
+					$cidera_irms = $worksheet->getCellByColumnAndRow($col_cidera, $row)->getValue();
+
+					$no_lp_irms = $this->get_explode_no_lp($worksheet->getCellByColumnAndRow($col_no_lp, $row)->getValue());
 
 					$data_coklit_irms[] = array(
-						'irms_id' => $uniq_id_irms,
-						'tanggal' => $tanggal_dasi,
-						'nama_korban' => $korban_dasi,
-						'cidera' => $cidera_dasi,
-						'no_lp' => $no_lp_dasi
+						'irms_id' => $irms_id,
+						'tanggal' => $tanggal_irms,
+						'nama_korban' => $korban_irms,
+						'cidera' => $cidera_irms,
+						'no_lp' => $no_lp_irms
 					);
 				}
 			}
@@ -87,7 +97,12 @@ class Coklit extends CI_Controller
 			if (isset($_FILES["fileExcelDasi"]["name"])) {
 				$path = $_FILES["fileExcelDasi"]["tmp_name"];
 				$object = PHPExcel_IOFactory::load($path);
-				$uniq_id_dasi = md5(uniqid(rand(), true));
+
+				$jam_saat_ini = date('H:i:s');
+				$tanggal_saat_ini = date('Y-m-d');
+				$random_string = uniqid(rand(), true);
+
+				$dasi_id  = $tanggal_saat_ini . $jam_saat_ini . $random_string;
 				foreach ($object->getWorksheetIterator() as $worksheet) {
 
 					$highestRow = $worksheet->getHighestRow();
@@ -101,18 +116,19 @@ class Coklit extends CI_Controller
 
 
 					for ($row = $row; $row <= $highestRow; $row++) {
-						$tanggal_irms = $worksheet->getCellByColumnAndRow($col_tanggal, $row)->getValue();
-						$korban_irms = $worksheet->getCellByColumnAndRow($col_korban, $row)->getValue();
-						$cidera_irms = $worksheet->getCellByColumnAndRow($col_cidera, $row)->getValue();
-						$no_lp_irms = $this->get_explode_no_lp($worksheet->getCellByColumnAndRow($col_no_lp, $row)->getValue());
+						$tanggal_dasi = $worksheet->getCellByColumnAndRow($col_tanggal, $row)->getValue();
+						$korban_dasi = $worksheet->getCellByColumnAndRow($col_korban, $row)->getValue();
+						$cidera_dasi = $worksheet->getCellByColumnAndRow($col_cidera, $row)->getValue();
+
+						$no_lp_dasi = $this->get_explode_no_lp($worksheet->getCellByColumnAndRow($col_no_lp, $row)->getValue());
 
 
 						$data_coklit_dasi[] = array(
-							'dasi_id' => $uniq_id_dasi,
-							'tanggal' => $tanggal_irms,
-							'nama_korban' => $korban_irms,
-							'cidera' => $cidera_irms,
-							'no_lp' => $no_lp_irms
+							'dasi_id' => $dasi_id,
+							'tanggal' => $tanggal_dasi,
+							'nama_korban' => $korban_dasi,
+							'cidera' => $cidera_dasi,
+							'no_lp' => $no_lp_dasi
 						);
 					}
 				}
@@ -121,7 +137,7 @@ class Coklit extends CI_Controller
 				$this->Coklit_model->insert('dasi', $data_coklit_dasi);
 				$this->Coklit_model->insert('irms', $data_coklit_irms);
 				$this->session->set_flashdata('message', "Berhasil menyimpan data");
-				redirect('pengentry/Coklit/index/' . $uniq_id_irms . '/' . $uniq_id_dasi);
+				redirect('pengentry/Coklit/index/' . $irms_id . '/' . $dasi_id);
 			} else {
 				$this->session->set_flashdata('upload_error', 'Gagal mengirim berkas');
 				redirect('pengentry/Coklit/insert_data');

@@ -86,7 +86,6 @@
 								</div>
 							<?php } else { ?>
 								<div class="table-responsive  tb-iwkl p-0">
-									<h5 class="mt-2">Result</h5>
 									<table class="table table-striped align-items-center mt-3 mb-0" id="tbl_result">
 										<thead>
 											<tr>
@@ -127,7 +126,11 @@
 
 												</tr>
 
+
+
 											<?php } ?>
+
+
 										</tbody>
 									</table>
 
@@ -143,154 +146,192 @@
 							?>
 
 
-						</div>
-					</div>
-				</div>
-			</div>
+							<!-- TABLE JUMLAH -->
+
+							<div class="table-responsive mt-2 mb-2 tb-iwkl p-0">
+								<h4 class="mt-2">Total Data</h4>
+								<table class="table table-border-rounded align-items-center mt-3 mb-0" id="tbl_result2" style="border-radius: 20px;">
+									<tbody>
+
+										<tr>
+											<td colspan="3" class="bg-warning text-white">
+												<h6 class="text-white">Total IRMS MD : <?= $total_md_irms; ?></h6>
+											</td>
 
 
-			<!-- Modal entry detail user -->
-			<?php echo form_open_multipart('pengentry/iw/update_batch_setting_iwkbu'); ?>
-			<div class="modal fade" id="setting_iwkbu" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-				<div class="modal-dialog modal-dialog-scrollable">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h6 class="modal-title" id="exampleModalLabel">Pengaturan Data Excel IWKBU</h6>
-							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
-						</div>
-						<div class="modal-body">
-							<div class="form-group" hidden>
-								<input class="form-control user_id" id="user_id" name="user_id" value="" readonly>
+											<td></td>
+											<td></td>
+											<td colspan="3" class="bg-warning text-white">
+												<h6 class="text-white">Total DASI MD: <?= $total_md_dasi; ?></h6>
+											</td>
+
+
+										</tr>
+										<tr>
+
+											<td colspan="3" class="bg-primary text-white">
+												<h6 class="text-white">Total IRMS LL: <?= $total_ll_irms; ?></h6>
+											</td>
+
+
+											<td></td>
+											<td></td>
+											<td colspan="3" class="bg-primary text-white">
+												<h6 class="text-white">Total DASI LL: <?= $total_ll_dasi; ?></h6>
+											</td>
+
+										</tr>
+
+									</tbody>
+								</table>
 							</div>
-
-
-							<div class="div d-flex justify-content-center">
-								<lottie-player class="text-center" src="https://assets10.lottiefiles.com/packages/lf20_nUTP5Vd52q.json" background="transparent" speed="1" style="width: 300px; height: 300px;" loop autoplay></lottie-player>
-							</div>
-							<?php foreach ($setting_iwkbu as $setting_iwkbu) : ?>
-								<h6><?= $setting_iwkbu->name; ?></h6>
-								<label for="Col">Col<span class="text-danger">*</span></label>
-								<div class="form-group">
-									<input class="form-control nama_lengkap" id="col" name="id_<?= $setting_iwkbu->id; ?>" value="<?= $setting_iwkbu->id; ?>" hidden>
-									<input class="form-control nama_lengkap" type="number" id="col" name="col_<?= $setting_iwkbu->id; ?>" value="<?= $setting_iwkbu->col; ?>" required>
-								</div>
-
-								<label for="Col">Row start<span class="text-danger">*</span></label>
-								<div class="form-group">
-									<input class="form-control nama_lengkap" type="number" id="col" name="row_start_<?= $setting_iwkbu->id; ?>" value="<?= $setting_iwkbu->row_start; ?>" required>
-								</div>
-
-								<label for="Col">Row end<span class="text-danger">*</span></label>
-								<div class="form-group">
-									<input class="form-control nama_lengkap" type="number" id="col" name="row_end_<?= $setting_iwkbu->id; ?>" value="<?= $setting_iwkbu->row_end; ?>" required>
-								</div>
-
-
-							<?php endforeach; ?>
-
-
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-							<button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Simpan</button>
 						</div>
 					</div>
 				</div>
 
-			</div>
-			<?php echo form_close(); ?>
 
-
-			<?php echo form_open_multipart('pengentry/iw/update_batch_setting_iwkl'); ?>
-			<div class="modal fade" id="setting_iwkl" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-				<div class="modal-dialog modal-dialog-scrollable">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h6 class="modal-title" id="exampleModalLabel">Pengaturan Data Excel IWKL</h6>
-							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
-						</div>
-						<div class="modal-body">
-							<div class="form-group" hidden>
-								<input class="form-control user_id" id="user_id" name="user_id" value="" readonly>
+				<!-- Modal entry detail user -->
+				<?php echo form_open_multipart('pengentry/iw/update_batch_setting_iwkbu'); ?>
+				<div class="modal fade" id="setting_iwkbu" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+					<div class="modal-dialog modal-dialog-scrollable">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h6 class="modal-title" id="exampleModalLabel">Pengaturan Data Excel IWKBU</h6>
+								<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
 							</div>
-
-
-							<div class="div d-flex justify-content-center">
-								<lottie-player class="text-center" src="https://assets10.lottiefiles.com/packages/lf20_nUTP5Vd52q.json" background="transparent" speed="1" style="width: 300px; height: 300px;" loop autoplay></lottie-player>
-							</div>
-							<?php foreach ($setting_iwkl as $setting_iwkl) : ?>
-								<h6><?= $setting_iwkl->name; ?></h6>
-								<label for="Col">Col<span class="text-danger">*</span></label>
-								<div class="form-group">
-									<input class="form-control nama_lengkap" id="col" name="id_<?= $setting_iwkl->id; ?>" value="<?= $setting_iwkl->id; ?>" hidden>
-									<input class="form-control nama_lengkap" type="number" id="col" name="col_<?= $setting_iwkl->id; ?>" value="<?= $setting_iwkl->col; ?>" required>
-								</div>
-
-								<label for="Col">Row start<span class="text-danger">*</span></label>
-								<div class="form-group">
-									<input class="form-control nama_lengkap" type="number" id="col" name="row_start_<?= $setting_iwkl->id; ?>" value="<?= $setting_iwkl->row_start; ?>" required>
-								</div>
-
-								<label for="Col">Row end<span class="text-danger">*</span></label>
-								<div class="form-group">
-									<input class="form-control nama_lengkap" type="number" id="col" name="row_end_<?= $setting_iwkl->id; ?>" value="<?= $setting_iwkl->row_end; ?>" required>
+							<div class="modal-body">
+								<div class="form-group" hidden>
+									<input class="form-control user_id" id="user_id" name="user_id" value="" readonly>
 								</div>
 
 
-							<?php endforeach; ?>
-
-
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-							<button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Simpan</button>
-						</div>
-					</div>
-				</div>
-
-			</div>
-			<?php echo form_close(); ?>
-
-
-
-			<div class=" modal fade" id="alertError" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-				<div class="modal-dialog modal-dialog-scrollable">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title" id="exampleModalLabel">Pemberitahuan</h5>
-							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-						</div>
-
-						<div class="modal-body">
-
-							<div class="form-group  d-flex justify-content-center">
-								<div class="row">
-									<lottie-player class="text-center" src=" https://assets10.lottiefiles.com/packages/lf20_tl52xzvn.json" id="anim_email_failed" background="transparent" speed="1" style="width: 120px; height: 120px;" loop autoplay></lottie-player>
-									<div class="col">
-
-										<br>
-										<h5>Harap periksa kembali file yang anda upload</h5>
-										<p>Seperti format file dan ukuran file</p>
-
+								<div class="div d-flex justify-content-center">
+									<lottie-player class="text-center" src="https://assets10.lottiefiles.com/packages/lf20_nUTP5Vd52q.json" background="transparent" speed="1" style="width: 300px; height: 300px;" loop autoplay></lottie-player>
+								</div>
+								<?php foreach ($setting_iwkbu as $setting_iwkbu) : ?>
+									<h6><?= $setting_iwkbu->name; ?></h6>
+									<label for="Col">Col<span class="text-danger">*</span></label>
+									<div class="form-group">
+										<input class="form-control nama_lengkap" id="col" name="id_<?= $setting_iwkbu->id; ?>" value="<?= $setting_iwkbu->id; ?>" hidden>
+										<input class="form-control nama_lengkap" type="number" id="col" name="col_<?= $setting_iwkbu->id; ?>" value="<?= $setting_iwkbu->col; ?>" required>
 									</div>
-								</div>
+
+									<label for="Col">Row start<span class="text-danger">*</span></label>
+									<div class="form-group">
+										<input class="form-control nama_lengkap" type="number" id="col" name="row_start_<?= $setting_iwkbu->id; ?>" value="<?= $setting_iwkbu->row_start; ?>" required>
+									</div>
+
+									<label for="Col">Row end<span class="text-danger">*</span></label>
+									<div class="form-group">
+										<input class="form-control nama_lengkap" type="number" id="col" name="row_end_<?= $setting_iwkbu->id; ?>" value="<?= $setting_iwkbu->row_end; ?>" required>
+									</div>
+
+
+								<?php endforeach; ?>
+
 
 							</div>
-
-
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+								<button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Simpan</button>
+							</div>
 						</div>
-						<div class="modal-footer">
+					</div>
 
-							<button type="button" class="btn btn-primary" data-bs-dismiss="modal">Oke</button>
+				</div>
+				<?php echo form_close(); ?>
 
+
+				<?php echo form_open_multipart('pengentry/iw/update_batch_setting_iwkl'); ?>
+				<div class="modal fade" id="setting_iwkl" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+					<div class="modal-dialog modal-dialog-scrollable">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h6 class="modal-title" id="exampleModalLabel">Pengaturan Data Excel IWKL</h6>
+								<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
+							</div>
+							<div class="modal-body">
+								<div class="form-group" hidden>
+									<input class="form-control user_id" id="user_id" name="user_id" value="" readonly>
+								</div>
+
+
+								<div class="div d-flex justify-content-center">
+									<lottie-player class="text-center" src="https://assets10.lottiefiles.com/packages/lf20_nUTP5Vd52q.json" background="transparent" speed="1" style="width: 300px; height: 300px;" loop autoplay></lottie-player>
+								</div>
+								<?php foreach ($setting_iwkl as $setting_iwkl) : ?>
+									<h6><?= $setting_iwkl->name; ?></h6>
+									<label for="Col">Col<span class="text-danger">*</span></label>
+									<div class="form-group">
+										<input class="form-control nama_lengkap" id="col" name="id_<?= $setting_iwkl->id; ?>" value="<?= $setting_iwkl->id; ?>" hidden>
+										<input class="form-control nama_lengkap" type="number" id="col" name="col_<?= $setting_iwkl->id; ?>" value="<?= $setting_iwkl->col; ?>" required>
+									</div>
+
+									<label for="Col">Row start<span class="text-danger">*</span></label>
+									<div class="form-group">
+										<input class="form-control nama_lengkap" type="number" id="col" name="row_start_<?= $setting_iwkl->id; ?>" value="<?= $setting_iwkl->row_start; ?>" required>
+									</div>
+
+									<label for="Col">Row end<span class="text-danger">*</span></label>
+									<div class="form-group">
+										<input class="form-control nama_lengkap" type="number" id="col" name="row_end_<?= $setting_iwkl->id; ?>" value="<?= $setting_iwkl->row_end; ?>" required>
+									</div>
+
+
+								<?php endforeach; ?>
+
+
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+								<button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Simpan</button>
+							</div>
+						</div>
+					</div>
+
+				</div>
+				<?php echo form_close(); ?>
+
+
+
+				<div class=" modal fade" id="alertError" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					<div class="modal-dialog modal-dialog-scrollable">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="exampleModalLabel">Pemberitahuan</h5>
+								<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+							</div>
+
+							<div class="modal-body">
+
+								<div class="form-group  d-flex justify-content-center">
+									<div class="row">
+										<lottie-player class="text-center" src=" https://assets10.lottiefiles.com/packages/lf20_tl52xzvn.json" id="anim_email_failed" background="transparent" speed="1" style="width: 120px; height: 120px;" loop autoplay></lottie-player>
+										<div class="col">
+
+											<br>
+											<h5>Harap periksa kembali file yang anda upload</h5>
+											<p>Seperti format file dan ukuran file</p>
+
+										</div>
+									</div>
+
+								</div>
+
+
+							</div>
+							<div class="modal-footer">
+
+								<button type="button" class="btn btn-primary" data-bs-dismiss="modal">Oke</button>
+
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
 
-			<div id="footer">
-				<?php $this->load->view('pengentry/_partials/footer') ?>
-			</div>
+				<div id="footer">
+					<?php $this->load->view('pengentry/_partials/footer') ?>
+				</div>
 
 	</main>
 
