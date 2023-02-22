@@ -46,6 +46,9 @@ class Coklit extends CI_Controller
 		$data['total_md_dasi'] = $this->Coklit_model->count_md_dasi($dasi_id);
 		$data['total_ll_irms'] = $this->Coklit_model->count_ll_irms($irms_id);
 		$data['total_ll_dasi'] = $this->Coklit_model->count_ll_dasi($dasi_id);
+
+		$data['data_dasi'] = $this->Coklit_model->get_data_dasi($dasi_id);
+		$data['data_irms'] = $this->Coklit_model->get_data_irms($irms_id);
 		$this->load->view('pengentry/iw/v_result', $data);
 	}
 

@@ -66,12 +66,7 @@
 							<?php
 
 							if ($result == null) { ?>
-								<!-- <div class="alert alert-danger" role="alert">
-									<h4 class="alert-heading">Data tidak ditemukan!</h4>
-									<p>Maaf, data yang anda cari tidak ditemukan. Silahkan coba lagi.</p>
-									<hr>
-									<p class="mb-0">Jika anda yakin data yang anda cari ada, silahkan hubungi admin.</p>
-								</div> -->
+
 								<div class="text-center">
 									<div class="d-flex justify-content-center"><lottie-player src="https://assets6.lottiefiles.com/packages/lf20_agnejizn.json" mode="bounce" background="transparent" speed="1" style="width: 300px; height: 300px;" loop autoplay></lottie-player></div>
 								</div>
@@ -110,19 +105,119 @@
 											<?php $no = 1; ?>
 											<?php $no_dasi = 1; ?>
 
-											<?php foreach ($result  as $r) { ?>
+
+											<?php
+
+											$unique_names = array();
+											$duplicate_names = array();
+											$counter = 1;
+											$unqiue_no_lp = array();
+											$duplicate_no_lp = array();
+											$counter_no_lp = 1;
+
+
+
+											foreach ($result  as $r) { ?>
 												<tr>
-													<td><?= $no++; ?></td>
-													<td><?= $r->irms_tanggal; ?></td>
-													<td><?= $r->irms_nama_korban; ?></td>
-													<td><?= $r->irms_cidera; ?></td>
-													<td><?= $r->irms_no_lp; ?></td>
-													<td></td>
-													<td><?= $no_dasi++; ?></td>
-													<td><?= $r->dasi_tanggal; ?></td>
-													<td><?= $r->dasi_nama_korban; ?></td>
-													<td><?= $r->dasi_cidera; ?></td>
-													<td><?= $r->dasi_no_lp; ?></td>
+
+													<?php if ($r->irms_tanggal == null) { ?>
+														<td class="bg-danger text-white "><?= $no++; ?></td>
+													<?php } else { ?>
+														<td><?= $no++; ?></td>
+													<?php } ?>
+													<?php if ($r->irms_tanggal == null) { ?>
+														<td class="bg-warning "></td>
+													<?php } else { ?>
+														<td><?= $r->irms_tanggal; ?></td>
+													<?php } ?>
+
+													<?php if ($r->irms_nama_korban == null) { ?>
+														<td class="bg-warning text-white ">Tidak ada data</td>
+													<?php } else { ?>
+														<td><?= $r->irms_nama_korban; ?></td>
+													<?php } ?>
+
+													<?php if ($r->irms_cidera == null) { ?>
+														<td class="bg-warning "></td>
+													<?php } else { ?>
+														<td><?= $r->irms_cidera; ?></td>
+													<?php } ?>
+
+													<?php if ($r->irms_no_lp == null) { ?>
+														<td class="bg-warning "></td>
+													<?php } else { ?>
+														<td><?= $r->irms_no_lp; ?></td>
+													<?php } ?>
+
+													<?php if ($r->irms_no_lp == null) { ?>
+														<td class="bg-danger "></td>
+													<?php } else { ?>
+														<td></td>
+													<?php } ?>
+
+													<!-- Dasi -->
+
+													<?php if ($r->dasi_no_lp == null) { ?>
+														<td class="bg-danger text-white "><?= $no_dasi++; ?></td>
+													<?php } else { ?>
+														<td><?= $no_dasi++; ?></td>
+													<?php } ?>
+
+													<?php if ($r->dasi_tanggal == null) { ?>
+														<td class="bg-warning "></td>
+													<?php } else { ?>
+														<td><?= $r->dasi_tanggal; ?></td>
+													<?php } ?>
+
+													<?php if ($r->dasi_nama_korban == null) { ?>
+														<td class="bg-warning text-white ">Tidak ada data</td>
+													<?php } else { ?>
+														<td><?= $r->dasi_nama_korban; ?></td>
+													<?php } ?>
+
+													<!-- <?php
+															$name = trim(preg_replace("/\([^)]+\)/", "", $r->dasi_nama_korban));
+															$soundex = soundex($name);
+
+															if (in_array($soundex, $unique_names)) {
+																$duplicate_names[] = $name;
+															} else {
+																$unique_names[] = $soundex;
+															}
+															?>
+													<?php if (in_array($name, $duplicate_names)) {
+													?>
+														<td class="bg-warning text-white "><?= $name . '(Duplikat)'; ?></td>
+													<?php } else { ?>
+														<td><?= $r->dasi_nama_korban; ?></td>
+														}
+													<?php } ?>
+
+													<?php
+													$counter++;
+
+
+													?> -->
+
+
+
+
+
+
+													<?php if ($r->dasi_cidera == null) { ?>
+														<td class="bg-warning text-white "></td>
+													<?php } else { ?>
+														<td><?= $r->dasi_cidera; ?></td>
+													<?php } ?>
+
+
+
+													<?php if ($r->dasi_no_lp == null) { ?>
+														<td class="bg-warning text-white "></td>
+													<?php } else { ?>
+														<td><?= $r->dasi_no_lp; ?></td>
+													<?php } ?>
+
 
 												</tr>
 
@@ -144,6 +239,9 @@
 
 
 							?>
+
+
+
 
 
 							<!-- TABLE JUMLAH -->
@@ -172,7 +270,6 @@
 											<td colspan="3" class="bg-primary text-white">
 												<h6 class="text-white">Total IRMS LL: <?= $total_ll_irms; ?></h6>
 											</td>
-
 
 											<td></td>
 											<td></td>
@@ -337,8 +434,6 @@
 
 
 
-
-
 	<div class="fixed-plugin">
 		<?php $this->load->view('pengentry/_partials/settingbar') ?>
 	</div>
@@ -351,10 +446,6 @@
 	<script src="<?php echo base_url(); ?>assets/assets/js/bootstrap.min.js" type="text/javascript"></script>
 	<!-- pengentryLTE App -->
 	<script src="<?php echo base_url(); ?>assets/assets/js/app.min.js" type="text/javascript"></script>
-
-
-
-
 
 
 	<!-- Fungsi memunculkan allert gagal -->
@@ -389,13 +480,6 @@
 
 		});
 	</script>
-
-
-
-
-
-
-
 
 
 </body>
