@@ -134,7 +134,7 @@
 								<lottie-player class="text-center" src="https://assets2.lottiefiles.com/packages/lf20_fe64ze86.json" background="transparent" speed="1" style="width: 120px; height: 120px;" loop autoplay></lottie-player>
 							</div>
 
-							<table>
+							<table class="mt-3">
 								<td>
 									<div class="form-group">
 										<label for="Col">Col Tanggal<span class="text-danger">*</span></label>
@@ -202,7 +202,7 @@
 							<div class="form-group" hidden>
 								<input class="form-control user_id" id="id" name="id" value="<?php echo $setting_dasi['id']; ?>">
 							</div>
-							<table>
+							<table class="mt-3">
 								<tr>
 									<td>
 										<div class="form-group">
