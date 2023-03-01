@@ -130,8 +130,9 @@
 							<div class="row">
 								<div class="col">
 
-									<label for="Col">Col Tanggal<span class="text-danger">*</span></label>
+
 									<div class="form-group">
+										<label for="Col">Col Tanggal<span class="text-danger">*</span></label>
 
 										<input class="form-control " type="number" id="col" name="col_tanggal" value="<?= $setting_irms['col_tanggal']; ?>" required>
 									</div>
@@ -139,40 +140,39 @@
 
 								<div class="col">
 
-									<label for="Col">Col Korban<span class="text-danger">*</span></label>
-									<div class="form-group">
 
+									<div class="form-group">
+										<label for="Col">Col Korban<span class="text-danger">*</span></label>
 										<input class="form-control " type="number" id="col" name="col_korban" value="<?= $setting_irms['col_korban']; ?>" required>
 									</div>
 								</div>
 
 								<div class="col">
 
-									<label for="Col">Col Cidera<span class="text-danger">*</span></label>
-									<div class="form-group">
 
+									<div class="form-group">
+										<label for="Col">Col Cidera<span class="text-danger">*</span></label>
 										<input class="form-control " type="number" id="col" name="col_cidera" value="<?= $setting_irms['col_cidera']; ?>" required>
 									</div>
 								</div>
 
 								<div class="col">
 
-									<label for="Col">Col No LP<span class="text-danger">*</span></label>
-									<div class="form-group">
 
+									<div class="form-group">
+										<label for="Col">Col No LP<span class="text-danger">*</span></label>
 										<input class="form-control " type="number" id="col" name="col_no_lp" value="<?= $setting_irms['col_no_lp']; ?>" required>
 									</div>
 								</div>
 
 								<div class="col">
-									<label for="Col">Row start<span class="text-danger">*</span></label>
+
 									<div class="form-group">
+										<label for="Col">Row start<span class="text-danger">*</span></label>
 										<input class="form-control " type="number" id="name_row" name="row_start" value="<?= $setting_irms['row_start']; ?>" required>
 									</div>
 								</div>
 							</div>
-
-
 
 							<input class="form-control " name="table" value="irms_excel_setting" required hidden>
 

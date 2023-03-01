@@ -34,7 +34,7 @@ class Coklit extends CI_Controller
 		$data['setting_dasi'] = $this->Excel_model->get_setting_by_id('dasi_excel_setting', 1);
 		$data['setting_irms'] = $this->Excel_model->get_setting_by_id('irms_excel_setting', 1);
 
-		$this->load->view('pengentry/iw/v_entry_coklit', $data);
+		$this->load->view('pengentry/coklit/v_entry_coklit', $data);
 	}
 	public function index($irms_id, $dasi_id)
 	{
@@ -49,7 +49,7 @@ class Coklit extends CI_Controller
 
 		$data['data_dasi'] = $this->Coklit_model->get_data_dasi($dasi_id);
 		$data['data_irms'] = $this->Coklit_model->get_data_irms($irms_id);
-		$this->load->view('pengentry/iw/v_result', $data);
+		$this->load->view('pengentry/coklit/v_result', $data);
 	}
 
 	public function import_excel()
