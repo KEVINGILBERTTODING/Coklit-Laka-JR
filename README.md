@@ -1,4 +1,4 @@
-# Kandean
+# Coklit-JR
 <h4>Kandean is an application to save or share our favorite recipes to other users. 
 There are several features that make this application different from other recipe applications. 🍔</h4>
 
@@ -39,35 +39,8 @@ There are several features that make this application different from other recip
 
 ![Cover-4](https://user-images.githubusercontent.com/79959818/190845503-d4ea76d6-6cad-4300-ab21-aa5dedafb43e.png)
 
-<h3>* Admin password 👨🏼‍💻</h3>
-<ul>
-<li><h5>Username: Kandean</h5></li>
-<li><h5>Password: superadmin</h5></li>
-</ul>
-
-<h2> How to run the project </h4>
-<ul>
-  <h4><li>Download or clone the api file and database from the api branch https://github.com/KEVINGILBERTTODING/Recipe-App/tree/api</li></h4>
-  <h4> <li>
-  Create a new folder named "recipe" in the htdocs folder if you are using xampp, then paste all the api files from the api branch into the recipe folder.</li>
-</h4>
-  <h4><li>
-  
-  Create a new database with the name "recipes" then import the recipe file in the database folder in the previously cloned api branch.
-  
-  </li></h4>
-  <h4><li>
-  
-  Open the application project using android studio or with another ide, find the file data_api.java and server_api.java and replace the ip address with your ip         address or your domain
-  
-  ![image](https://user-images.githubusercontent.com/79959818/186111558-bf3b5ac1-756e-4115-aff8-3b8d14941d11.png)
-  
-  ![image](https://user-images.githubusercontent.com/79959818/186112026-e8bbb2b9-4834-4a32-bff5-2d6139026363.png)
 
 
-  </li></h4>
-  
-  <h2>Enjoy the app :blush:, dont forget to drop the star 🌟✨ </h2>
 
 </ul>
 
