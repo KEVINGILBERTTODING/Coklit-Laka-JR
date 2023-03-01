@@ -71,7 +71,7 @@
 										</div>
 									</div>
 									<div class="col-4 text-end">
-										<div class="icon icon-shape bg-gradient-danger shadow-danger text-center rounded-circle">
+										<div class="icon icon-shape bg-gradient-primary shadow-danger text-center rounded-circle">
 											<i class="ni ni-book-bookmark text-lg opacity-10" aria-hidden="true"></i>
 										</div>
 									</div>

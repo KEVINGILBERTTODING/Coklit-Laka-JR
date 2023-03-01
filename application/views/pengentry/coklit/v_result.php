@@ -58,8 +58,11 @@
 						<div class="card-header ">
 							<h3 id="h1">Result</h3>
 
-							<a class="btn btn-success" href="<?= base_url('pengentry/Coklit/export/' . $irms_id . '/' . $dasi_id); ?>">Export to Excel
-							</a>
+							<div class="d-flex justify-content-end">
+								<a class="btn btn-success" href="<?= base_url('pengentry/Coklit/export/' . $irms_id . '/' . $dasi_id); ?>">Export to Excel
+								</a>
+							</div>
+
 
 
 							<!-- Div flash data -->

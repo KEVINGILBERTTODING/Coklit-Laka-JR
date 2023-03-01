@@ -24,7 +24,7 @@
 
 
 <body class="g-sidenav-show   bg-gray-100">
-	<div class="position-absolute w-100 min-height-300 top-0" style="background-image: url('https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/profile-layout-header.jpg'); background-position-y: 50%;">
+	<div class="position-absolute w-100 min-height-300 top-0" style="background-image: url('<?= base_url('assets/img/bg.jpeg'); ?>'); background-position-y: 30%;">
 		<span class="mask bg-primary opacity-6"></span>
 	</div>
 
@@ -161,40 +161,7 @@
 					</div>
 				</div>
 
-				<div class="col-md-3">
-					<div class="card card-profile">
-						<img src="<?php echo base_url('uploads/qrcode/') . $detail_user['file_qrcode']; ?>" alt="Image placeholder" class="card-img-top">
-						<div class="row justify-content-center">
-							<div class="col-4 col-lg-4 order-lg-2">
-								<div class="mt-n4 mt-lg-n6 mb-4 mb-lg-0">
-									<a href="javascript:;">
-										<img src="<?php echo base_url('uploads/photo_profile/') . $detail_user['photo_profile']; ?>" class="rounded-circle border border-2 border-white mt-3" width="80" height="80" alt="Image placeholder">
-									</a>
-								</div>
-							</div>
-						</div>
-						<div class="card-header text-center border-0 pt-0 pt-lg-2 pb-4 pb-lg-3">
-							<div class="d-flex justify-content-between">
-								<a href="javascript:;" class="btn btn-sm btn-info mb-0 d-none d-lg-block" data-bs-toggle="modal" data-bs-target="#updateqrcode">Upload</a>
-								<a href="javascript:;" class="btn btn-sm btn-info mb-0 d-block d-lg-none"><i class="ni ni-collection"></i></a>
-								<a href="<?php echo base_url('pengentry/profile/download_qrcode/') . $this->session->userdata('id') ?>" class="btn btn-sm btn-dark float-right mb-0 d-none d-lg-block">Download</a>
-								<a href="javascript:;" class="btn btn-sm btn-dark float-right mb-0 d-block d-lg-none"><i class="ni ni-email-83"></i></a>
-							</div>
-						</div>
-						<div class="card-body pt-0">
 
-							<div class="text-center mt-4">
-								<h5>
-									<?= $detail_user['nama_lengkap']; ?>
-								</h5>
-								<div class="h6 font-weight-300">
-									<i class="ni location_pin mr-2"></i><?= $detail_user['email']; ?>
-								</div>
-
-							</div>
-						</div>
-					</div>
-				</div>
 			</div>
 		</div>
 

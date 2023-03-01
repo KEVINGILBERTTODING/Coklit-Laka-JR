@@ -64,13 +64,18 @@
 
 								<div class="col col-md-2">
 									<button class="btn btn-info  btn-sm" data-bs-toggle="modal" data-bs-target="#setting_dasi">
-										Pengaturan Excel Dasi
+										Pengaturan Dasi
 								</div>
 								<div class="col col-md-2">
 									<button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#setting_irms">
-										Pengaturan Excel IRMS
+										Pengaturan IRMS
 								</div>
 
+
+							</div>
+
+							<div class="d-flex justify-content-center">
+								<lottie-player src="https://assets2.lottiefiles.com/packages/lf20_a4xidk9x.json" id="siang" background="transparent" speed="1" style="width: 300px; height: 300px;" loop autoplay></lottie-player>
 
 							</div>
 
@@ -122,62 +127,46 @@
 							<div class="form-group" hidden>
 								<input class="form-control user_id" id="id" name="id" value="<?php echo $setting_irms['id']; ?>">
 							</div>
+							<input class="form-control " name="table" value="irms_excel_setting" required hidden>
 
 
 							<div class="div d-flex justify-content-center">
-								<lottie-player class="text-center" src="https://assets10.lottiefiles.com/packages/lf20_nUTP5Vd52q.json" background="transparent" speed="1" style="width: 300px; height: 300px;" loop autoplay></lottie-player>
+								<lottie-player class="text-center" src="https://assets2.lottiefiles.com/packages/lf20_fe64ze86.json" background="transparent" speed="1" style="width: 120px; height: 120px;" loop autoplay></lottie-player>
 							</div>
 
-							<div class="row">
-								<div class="col">
-
-
+							<table>
+								<td>
 									<div class="form-group">
 										<label for="Col">Col Tanggal<span class="text-danger">*</span></label>
 
 										<input class="form-control " type="number" id="col" name="col_tanggal" value="<?= $setting_irms['col_tanggal']; ?>" required>
 									</div>
-								</div>
-
-								<div class="col">
-
-
+								</td>
+								<td>
 									<div class="form-group">
 										<label for="Col">Col Korban<span class="text-danger">*</span></label>
 										<input class="form-control " type="number" id="col" name="col_korban" value="<?= $setting_irms['col_korban']; ?>" required>
 									</div>
-								</div>
-
-								<div class="col">
-
-
+								</td>
+								<td>
 									<div class="form-group">
 										<label for="Col">Col Cidera<span class="text-danger">*</span></label>
 										<input class="form-control " type="number" id="col" name="col_cidera" value="<?= $setting_irms['col_cidera']; ?>" required>
 									</div>
-								</div>
-
-								<div class="col">
-
-
+								</td>
+								<td>
 									<div class="form-group">
 										<label for="Col">Col No LP<span class="text-danger">*</span></label>
 										<input class="form-control " type="number" id="col" name="col_no_lp" value="<?= $setting_irms['col_no_lp']; ?>" required>
 									</div>
-								</div>
-
-								<div class="col">
-
+								</td>
+								<td>
 									<div class="form-group">
 										<label for="Col">Row start<span class="text-danger">*</span></label>
 										<input class="form-control " type="number" id="name_row" name="row_start" value="<?= $setting_irms['row_start']; ?>" required>
 									</div>
-								</div>
-							</div>
-
-							<input class="form-control " name="table" value="irms_excel_setting" required hidden>
-
-
+								</td>
+							</table>
 
 						</div>
 						<div class="modal-footer">
@@ -205,62 +194,51 @@
 							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
 						</div>
 						<div class="modal-body">
+
+							<div class="div d-flex justify-content-center">
+								<lottie-player class="text-center" src="https://assets2.lottiefiles.com/packages/lf20_fe64ze86.json" background="transparent" speed="1" style="width: 120px; height: 120px;" loop autoplay></lottie-player>
+							</div>
+
 							<div class="form-group" hidden>
 								<input class="form-control user_id" id="id" name="id" value="<?php echo $setting_dasi['id']; ?>">
 							</div>
+							<table>
+								<tr>
+									<td>
+										<div class="form-group">
+											<label for="Col">Col Tanggal<span class="text-danger">*</span></label>
+											<input class="form-control " type="number" id="col" name="col_tanggal" value="<?= $setting_dasi['col_tanggal']; ?>" required>
+										</div>
+									</td>
+									<td>
 
+										<div class="form-group">
+											<label for="Col">Col Korban<span class="text-danger">*</span></label>
+											<input class="form-control " type="number" id="col" name="col_korban" value="<?= $setting_dasi['col_korban']; ?>" required>
+										</div>
+									</td>
+									<td>
+										<div class="form-group">
+											<label for="Col">Col Cidera<span class="text-danger">*</span></label>
+											<input class="form-control " type="number" id="col" name="col_cidera" value="<?= $setting_dasi['col_cidera']; ?>" required>
+										</div>
+									</td>
+									<td>
+										<div class="form-group">
+											<label for="Col">Col No LP<span class="text-danger">*</span></label>
+											<input class="form-control " type="number" id="col" name="col_no_lp" value="<?= $setting_dasi['col_no_lp']; ?>" required>
+										</div>
+									</td>
+									<td>
+										<div class="form-group">
+											<label for="Col">Row start<span class="text-danger">*</span></label>
+											<input class="form-control " type="number" id="name_row" name="row_start" value="<?= $setting_dasi['row_start']; ?>" required>
+										</div>
+									</td>
 
-							<div class="div d-flex justify-content-center">
-								<lottie-player class="text-center" src="https://assets10.lottiefiles.com/packages/lf20_nUTP5Vd52q.json" background="transparent" speed="1" style="width: 300px; height: 300px;" loop autoplay></lottie-player>
-							</div>
-							<div class="row">
-								<div class="col">
-
-									<label for="Col">Col Tanggal<span class="text-danger">*</span></label>
-									<div class="form-group">
-
-										<input class="form-control " type="number" id="col" name="col_tanggal" value="<?= $setting_dasi['col_tanggal']; ?>" required>
-									</div>
-								</div>
-
-								<div class="col">
-
-									<label for="Col">Col Korban<span class="text-danger">*</span></label>
-									<div class="form-group">
-
-										<input class="form-control " type="number" id="col" name="col_korban" value="<?= $setting_dasi['col_korban']; ?>" required>
-									</div>
-								</div>
-
-								<div class="col">
-
-									<label for="Col">Col Cidera<span class="text-danger">*</span></label>
-									<div class="form-group">
-
-										<input class="form-control " type="number" id="col" name="col_cidera" value="<?= $setting_dasi['col_cidera']; ?>" required>
-									</div>
-								</div>
-
-								<div class="col">
-
-									<label for="Col">Col No LP<span class="text-danger">*</span></label>
-									<div class="form-group">
-
-										<input class="form-control " type="number" id="col" name="col_no_lp" value="<?= $setting_dasi['col_no_lp']; ?>" required>
-									</div>
-								</div>
-
-								<div class="col">
-									<label for="Col">Row start<span class="text-danger">*</span></label>
-									<div class="form-group">
-										<input class="form-control " type="number" id="name_row" name="row_start" value="<?= $setting_dasi['row_start']; ?>" required>
-									</div>
-								</div>
-							</div>
-
-
-
-							<input class="form-control " name="table" value="dasi_excel_setting" required hidden>
+									<input class="form-control " name="table" value="dasi_excel_setting" required hidden>
+								</tr>
+							</table>
 
 						</div>
 						<div class="modal-footer">
