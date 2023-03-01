@@ -75,7 +75,7 @@
 							</div>
 
 							<div class="d-flex justify-content-center">
-								<lottie-player src="https://assets2.lottiefiles.com/packages/lf20_a4xidk9x.json" id="siang" background="transparent" speed="1" style="width: 300px; height: 300px;" loop autoplay></lottie-player>
+								<lottie-player src="https://assets9.lottiefiles.com/packages/lf20_jkdsmf9r.json" id="siang" background="transparent" speed="1" style="width: 200px; height: 200px;" loop autoplay></lottie-player>
 
 							</div>
 
@@ -102,7 +102,7 @@
 									</div>
 								</div>
 								<div>
-									<button class='btn btn-success w-100' id="btn_submit" type="submit">
+									<button class='btn btn-primary w-100' id="btn_submit" type="submit">
 										<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
 										Import
 									</button>
