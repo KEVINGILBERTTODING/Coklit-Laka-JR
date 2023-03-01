@@ -1,8 +1,11 @@
 <?php
 
-use FontLib\Table\Type\post;
-
 defined('BASEPATH') or exit('No direct script access allowed');
+
+use FontLib\Table\Type\post;
+// Include librari PhpSpreadsheet
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class Coklit extends CI_Controller
 {
@@ -181,5 +184,210 @@ class Coklit extends CI_Controller
 		$no_lp = explode('/', $no_lp);
 		$no_lp = $no_lp[2];
 		return $no_lp;
+	}
+
+
+	public function export($irms_id, $dasi_id)
+	{
+
+		$spreadsheet = new Spreadsheet();
+		$sheet = $spreadsheet->getActiveSheet();
+
+		$style_col = [
+			'font' => ['bold' => true], // Set font nya jadi bold
+			'alignment' => [
+				'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER, // Set text jadi ditengah secara horizontal (center)
+				'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER // Set text jadi di tengah secara vertical (middle)
+			],
+			'borders' => [
+				'top' => ['borderStyle'  => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN], // Set border top dengan garis tipis
+				'right' => ['borderStyle'  => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN],  // Set border right dengan garis tipis
+				'bottom' => ['borderStyle'  => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN], // Set border bottom dengan garis tipis
+				'left' => ['borderStyle'  => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN] // Set border left dengan garis tipis
+			],
+			'fill' => [
+				'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID, // Set fill type sebagai solid fill
+				'startColor' => [
+					'argb' => '63B3ED' // Set nilai argb sebagai kode warna (contoh: warna abu-abu)
+				]
+			],
+
+
+
+		];
+		// Buat sebuah variabel untuk menampung pengaturan style dari isi tabel
+		$style_row = [
+			'alignment' => [
+				'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER // Set text jadi di tengah secara vertical (middle)
+			],
+			'borders' => [
+				'top' => ['borderStyle'  => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN], // Set border top dengan garis tipis
+				'right' => ['borderStyle'  => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN],  // Set border right dengan garis tipis
+				'bottom' => ['borderStyle'  => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN], // Set border bottom dengan garis tipis
+				'left' => ['borderStyle'  => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN] // Set border left dengan garis tipis
+			]
+
+
+
+
+		];
+
+		$style_empty = [
+			'fill' => [
+				'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID, // Set fill type sebagai solid fill
+				'startColor' => [
+					'argb' => 'FFFF00' // Set nilai argb sebagai kode warna (contoh: warna abu-abu)
+				]
+			],
+			'borders' => [
+				'top' => ['borderStyle'  => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN], // Set border top dengan garis tipis
+				'right' => ['borderStyle'  => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN],  // Set border right dengan garis tipis
+				'bottom' => ['borderStyle'  => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN], // Set border bottom dengan garis tipis
+				'left' => ['borderStyle'  => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN] // Set border left dengan garis tipis
+			]
+
+		];
+
+
+
+
+		$sheet->setCellValue('A1', "IRMS")->getStyle('A1')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FFFF00');
+		$sheet->mergeCells('A1:E1'); // Set Merge Cell pada kolom A1 sampai E1
+		$sheet->mergeCells('G1:K1');
+		$sheet->setCellValue('G1', "DASI")->getStyle('G1')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FFFF00');
+
+		$sheet->getStyle('A1')->getFont()->setBold(true); // Set bold kolom A1
+		$sheet->getStyle('G1')->getFont()->setBold(true);
+		// Buat header tabel nya pada baris ke 3
+		$sheet->setCellValue('A3', "NO");
+		$sheet->setCellValue('B3', "Tanggal");
+		$sheet->setCellValue('C3', "Korban");
+		$sheet->setCellValue('D3', "CideraMDL");
+		$sheet->setCellValue('E3', "NoLP");
+
+
+		$sheet->setCellValue('G3', "NO");
+		$sheet->setCellValue('H3', "Tanggal");
+		$sheet->setCellValue('I3', "Korban");
+		$sheet->setCellValue('J3', "CideraMDLLMD-LL");
+		$sheet->setCellValue('K3', "NoLP");
+		// Apply style header yang telah kita buat tadi ke masing-masing kolom header
+		$sheet->getStyle('A1:E1')->applyFromArray($style_row);
+		$sheet->getStyle('G1:K1')->applyFromArray($style_row);
+		$sheet->getStyle('A3')->applyFromArray($style_col);
+		$sheet->getStyle('B3')->applyFromArray($style_col);
+		$sheet->getStyle('C3')->applyFromArray($style_col);
+		$sheet->getStyle('D3')->applyFromArray($style_col);
+		$sheet->getStyle('E3')->applyFromArray($style_col);
+
+		$sheet->getStyle('G3')->applyFromArray($style_col);
+		$sheet->getStyle('H3')->applyFromArray($style_col);
+		$sheet->getStyle('I3')->applyFromArray($style_col);
+		$sheet->getStyle('J3')->applyFromArray($style_col);
+		$sheet->getStyle('K3')->applyFromArray($style_col);
+
+		$data_coklit = $this->Coklit_model->formula_coklit($irms_id, $dasi_id);
+
+		$no = 1;
+		$numrow = 4; // Set baris pertama untuk isi tabel adalah baris ke 4
+		foreach ($data_coklit as $data) { // Lakukan looping pada variabel siswa
+
+			$sheet->setCellValue('A' . $numrow, $no);
+			if ($data->irms_tanggal != null) {
+				$sheet->setCellValue('B' . $numrow, $data->irms_tanggal);
+			} else {
+				$sheet->getStyle('B' . $numrow)->applyFromArray($style_empty);
+				$sheet->getStyle('A' . $numrow)->applyFromArray($style_empty);
+				$sheet->getStyle('F' . $numrow)->applyFromArray($style_empty);
+				$sheet->getStyle('F' . $numrow)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FF0000');
+			}
+			if ($data->irms_nama_korban != null) {
+				$sheet->setCellValue('C' . $numrow, $data->irms_nama_korban);
+			} else {
+				$sheet->getStyle('C' . $numrow)->applyFromArray($style_empty);
+			}
+			if ($data->irms_cidera != null) {
+				$sheet->setCellValue('D' . $numrow, $data->irms_cidera);
+			} else {
+				$sheet->getStyle('D' . $numrow)->applyFromArray($style_empty);
+			}
+			if ($data->irms_no_lp != null) {
+				$sheet->setCellValue('E' . $numrow, $data->irms_no_lp);
+			} else {
+				$sheet->getStyle('E' . $numrow)->applyFromArray($style_empty);
+			}
+
+			$sheet->setCellValue('G' . $numrow, $no);
+
+			if ($data->dasi_tanggal != null) {
+				$sheet->setCellValue('H' . $numrow, $data->dasi_tanggal);
+			} else {
+				$sheet->getStyle('H' . $numrow)->applyFromArray($style_empty);
+				$sheet->getStyle('G' . $numrow)->applyFromArray($style_empty);
+				$sheet->getStyle('F' . $numrow)->applyFromArray($style_empty);
+				$sheet->getStyle('F' . $numrow)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FF0000');
+			}
+
+			if ($data->dasi_nama_korban != null) {
+				$sheet->setCellValue('I' . $numrow, $data->dasi_nama_korban);
+			} else {
+				$sheet->getStyle('I' . $numrow)->applyFromArray($style_empty);
+			}
+
+			if ($data->dasi_cidera != null) {
+				$sheet->setCellValue('J' . $numrow, $data->dasi_cidera);
+			} else {
+				$sheet->getStyle('J' . $numrow)->applyFromArray($style_empty);
+			}
+
+			if ($data->dasi_no_lp != null) {
+				$sheet->setCellValue('K' . $numrow, $data->dasi_no_lp);
+			} else {
+				$sheet->getStyle('K' . $numrow)->applyFromArray($style_empty);
+			}
+
+
+			// Apply style row yang telah kita buat tadi ke masing-masing baris (isi tabel)
+			$sheet->getStyle('A' . $numrow)->applyFromArray($style_row);
+			$sheet->getStyle('B' . $numrow)->applyFromArray($style_row);
+			$sheet->getStyle('C' . $numrow)->applyFromArray($style_row);
+			$sheet->getStyle('D' . $numrow)->applyFromArray($style_row);
+			$sheet->getStyle('E' . $numrow)->applyFromArray($style_row);
+
+			$sheet->getStyle('G' . $numrow)->applyFromArray($style_row);
+			$sheet->getStyle('H' . $numrow)->applyFromArray($style_row);
+			$sheet->getStyle('I' . $numrow)->applyFromArray($style_row);
+			$sheet->getStyle('J' . $numrow)->applyFromArray($style_row);
+			$sheet->getStyle('K' . $numrow)->applyFromArray($style_row);
+
+			$no++; // Tambah 1 setiap kali looping
+
+			$numrow++; // Tambah 1 setiap kali looping
+		}
+		// Set width kolom
+		$sheet->getColumnDimension('A')->setWidth(8); // Set width kolom A
+		$sheet->getColumnDimension('B')->setWidth(15); // Set width kolom B
+		$sheet->getColumnDimension('C')->setWidth(40); // Set width kolom C
+		$sheet->getColumnDimension('D')->setWidth(20); // Set width kolom D
+		$sheet->getColumnDimension('E')->setWidth(10); // Set width kolom E
+
+		$sheet->getColumnDimension('G')->setWidth(8); // Set width kolom A
+		$sheet->getColumnDimension('H')->setWidth(15); // Set width kolom B
+		$sheet->getColumnDimension('I')->setWidth(40); // Set width kolom C
+		$sheet->getColumnDimension('J')->setWidth(20); // Set width kolom D
+		$sheet->getColumnDimension('K')->setWidth(10); // Set width kolom E
+
+		// Set height semua kolom menjadi auto (mengikuti height isi dari kolommnya, jadi otomatis)
+		$sheet->getDefaultRowDimension()->setRowHeight(-1);
+		// Set orientasi kertas jadi LANDSCAPE
+		$sheet->getPageSetup()->setOrientation(\PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::ORIENTATION_LANDSCAPE);
+		// Set judul file excel nya
+		$sheet->setTitle("Coklit_result");
+		// Proses file excel
+		header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+		header('Content-Disposition: attachment; filename="Coklit_result.xlsx"'); // Set nama file excel nya
+		header('Cache-Control: max-age=0');
+		$writer = new Xlsx($spreadsheet);
+		$writer->save('php://output');
 	}
 }

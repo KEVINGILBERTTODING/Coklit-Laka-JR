@@ -58,6 +58,10 @@
 						<div class="card-header ">
 							<h3 id="h1">Result</h3>
 
+							<a class="btn btn-success" href="<?= base_url('pengentry/Coklit/export/' . $irms_id . '/' . $dasi_id); ?>">Export to Excel
+							</a>
+
+
 							<!-- Div flash data -->
 							<div class="flash-data" data-flashdata="<?php echo $this->session->flashdata('message'); ?>"></div>
 
